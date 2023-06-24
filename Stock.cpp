@@ -5,23 +5,6 @@
 
 #include "Stock.h"
 
-// class Stock {
-//     private:
-//         float price;
-//         float u;
-//         float d;
-
-//     public:
-//         Stock();
-
-//         Stock(float price, float u, float d): price(price), u(u), d(d) {}
-
-//         float getPrice() { return price; }
-//         float getU() { return u;}
-//         float getD() { return d; }
-
-// };
-
 Stock::Stock() {
 
 }
