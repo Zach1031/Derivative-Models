@@ -1,10 +1,12 @@
 CC=g++
 DEPS = Stoc
 
+FILES = *.cpp
 OBJS = *.o
+
 
 %.o: %.cpp
 	$(CC) -c -o $@ $<
 
-a.out: $(OBJS)
-	g++ $(OBJS) main.cpp 
+main: $(OBJS) $(FILES)
+	g++ $(OBJS) main.cpp -o main
