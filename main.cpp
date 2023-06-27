@@ -1,11 +1,11 @@
 #include <stdio.h>
 
-#include "EuropeanOption.h"
-#include "EuropeanCall.h"
-#include "EuropeanPut.h"
-#include "AmericanCall.h"
-#include "AmericanPut.h"
-#include "Stock.h"
+#include "src/AmericanCall.h"
+#include "src/EuropeanCall.h"
+#include "src/EuropeanPut.h"
+#include "src/AmericanCall.h"
+#include "src/AmericanPut.h"
+#include "src/Stock.h"
 
 
 int main() {
