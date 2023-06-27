@@ -1,12 +1,19 @@
 CC=g++
-DEPS = Stoc
 
-FILES = *.cpp
-OBJS = *.o
+OBJS=*.o
 
+ALL_FILES = $(wildcard *.cpp)
 
-%.o: %.cpp
+# remove main from object files
+OBJ_FILES = $(filter-out main.cpp, $(ALL_FILES))
+
+all: build main
+
+build: *.cpp *.h
+	$(CC) -c $(OBJ_FILES)
+
+%.o: %.cpp %.h
 	$(CC) -c -o $@ $<
 
-main: $(OBJS) $(FILES)
-	g++ $(OBJS) main.cpp -o main
+main: $(ALL_FILES)
+	$(CC) $(OBJS) main.cpp -o main

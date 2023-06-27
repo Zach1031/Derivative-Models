@@ -3,7 +3,6 @@
 
 #include "EuropeanOption.h"
 
-
 class EuropeanCall: public EuropeanOption {
     public:
         EuropeanCall();
