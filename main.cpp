@@ -1,19 +1,17 @@
 #include <stdio.h>
 
-#include "src/AmericanCall.h"
-#include "src/EuropeanCall.h"
-#include "src/EuropeanPut.h"
-#include "src/AmericanCall.h"
-#include "src/AmericanPut.h"
 #include "src/Stock.h"
+#include "src/BiTree.h"
 
 
 int main() {
     Stock stock = Stock(100, 0.06, 0.2);
 
-    stock.useCRRVals(0.3);
+    stock.useJRVals(0.33);
 
-    AmericanPut put = AmericanPut(100, 1, stock, 0.06, 3);
+    printf ("u: %.2f    d: %.2f\n", stock.getU(), stock.getD());
 
-    printf("The value of this call is: %.2f\n", put.calculateValue());
+    BiTree *tree = stock.createTree(3);
+
+    BiTree::printTree(tree, 0);
 }

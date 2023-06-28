@@ -1,12 +1,7 @@
 #ifndef STOCK
 #define STOCK
 
-#include "BiTree.h"
-
 class Stock {
-    private:
-        BiTree *createRoots(float N, float val); // helper function for createTree
-
     protected:
         float price; // current price of the stock
         float u; // percent change during up shift
@@ -32,8 +27,6 @@ class Stock {
         void useJRVals(float deltaT);
 
         float calculateProb(float deltaT);
-
-        BiTree *createTree(float N);
 
 };
 #endif
