@@ -1,3 +1,4 @@
+#include "Option.h"
 #include "EuropeanOption.h"
 #include "EuropeanCall.h"
 

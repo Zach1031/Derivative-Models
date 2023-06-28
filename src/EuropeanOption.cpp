@@ -1,10 +1,11 @@
 #include <math.h>
 #include <vector>
 
+#include "Option.h"
 #include "EuropeanOption.h"
 #include "Stock.h"
 
-EuropeanOption::EuropeanOption(float K, int T, Stock S, float r, int N): K(K), T(T), stock(S), r(r), N(N) {
+EuropeanOption::EuropeanOption(float K, int T, Stock S, float r, int N): Option(K, T, S, r, N) {
     dt = T/(float)N;
 
     p = (exp(r * dt) - stock.getD()) / (stock.getU() - stock.getD());

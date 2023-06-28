@@ -18,6 +18,12 @@ class Option {
         float p; // risk-neutral probability
 
         Stock stock; // associated stock
+
+        // the greeks
+        float delta;
+        float gamma;
+        float vega;
+        float rho;
     
     public:
         Option(float K, int T, Stock S, float r, int N);
