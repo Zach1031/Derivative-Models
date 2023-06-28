@@ -9,9 +9,11 @@
 
 
 int main() {
-    Stock stock = Stock(100, 1.1, 1 / 1.1);
+    Stock stock = Stock(100, 0.06, 0.2);
 
-    AmericanPut put = AmericanPut(100, 1, stock, 0.06, 3);
+    stock.useCRRVals(0.3);
+
+    EuropeanCall put = EuropeanCall(100, 1, stock, 0.06, 3);
 
     printf("The value of this call is: %.2f\n", put.calculateValue());
 }

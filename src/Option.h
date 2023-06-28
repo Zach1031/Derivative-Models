@@ -11,9 +11,6 @@ class Option {
         float r; // risk-free interest rate
         int N; // binomial steps until expiration 
 
-        float u; // average increase
-        float d; // average decrease
-
         float dt; // change in time per step
 
         float disc; // value of risk-free rate compounded continuously 

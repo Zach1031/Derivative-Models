@@ -17,9 +17,14 @@ float EuropeanOption::calculateValue() {
 
     std::vector<float> stockPrices;
 
+    float u = stock.getU();
+    float d = stock.getD();
+    float pu = stock.getPU();
+    float pd = stock.getPD();
+
     // every possible value replaces an instance of an increase with a decrease
     for (int i = 0; i < N + 1; i++) {
-        stockPrices.push_back(highestValue * (pow(stock.getD(), i) / (pow(stock.getU(), i))));
+        stockPrices.push_back(highestValue * (pow(d, i) / (pow(u, i))));
     }
 
     std::vector<float> optionPrices;
@@ -31,7 +36,7 @@ float EuropeanOption::calculateValue() {
     // compress each pair of points by taking the weighted average of the two future prices
     for (int i = N - 1; i >= 0; i--) {
         for (int j = 0; j <= i; j++) {
-            optionPrices[j] = disc * ((p * optionPrices[j]) + ((1 - p) * optionPrices[j + 1]));
+            optionPrices[j] = disc * ((pu * optionPrices[j]) + (pd * optionPrices[j + 1]));
         }
     }
     
