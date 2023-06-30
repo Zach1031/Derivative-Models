@@ -17,5 +17,5 @@ build: $(SRC_FILES) $(H_FILES)
 	$(CC) -c $(SRC_FILES)
 	mv *.o $(SRC)/
 
-main: $(SRC)/*.cpp
+main: $(SRC)/*.o
 	$(CC) $(OBJS) main.cpp -o main

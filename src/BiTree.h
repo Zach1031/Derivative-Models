@@ -3,7 +3,8 @@
 
 class BiTree {
     public:
-        float val;
+        float sVal; // stock value
+        float cVal; // option value at that time
         BiTree *up;
         BiTree *down;
 

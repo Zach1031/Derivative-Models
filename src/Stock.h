@@ -28,12 +28,17 @@ class Stock {
         float getPU();
         float getPD();
 
+        float getR();
+        float getSigma();
+
         void useCRRVals(float deltaT);
         void useJRVals(float deltaT);
 
         float calculateProb(float deltaT);
 
         BiTree *createTree(float N);
+
+        
 
 };
 #endif

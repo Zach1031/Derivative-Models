@@ -16,7 +16,7 @@ void BiTree::printTree(BiTree *root, int space)
     printf("\n");
     for (int i = 10; i < space; i++)
         printf(" ");
-    printf("%.2f\n", root->val);
+    printf("(%.2f, %.2f)\n", root->sVal, root->cVal);
  
     printTree(root->down, space);
 }

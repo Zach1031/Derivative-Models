@@ -18,6 +18,8 @@ float Stock::getU() { return u;}
 float Stock::getD() { return d; }
 float Stock::getPU() { return pu; }
 float Stock::getPD() { return pd; }
+float Stock::getR() { return r; }
+float Stock::getSigma() { return sigma; }
 
 
 // initializes values of u, d, and p based on Jarrow and Rudd paper
@@ -59,7 +61,7 @@ BiTree *Stock::createRoots(float N, float val) {
     
 
     BiTree *node = new BiTree;
-    node->val = val;
+    node->sVal = val;
     if (N > 0) {
         node->down = createRoots(N - 1, val * d);
         node->up = createRoots(N - 1, val * u);

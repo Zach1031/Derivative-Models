@@ -18,18 +18,25 @@ class Option {
         float p; // risk-neutral probability
 
         Stock stock; // associated stock
+        BiTree *tree; // binomial tree of stock prices and associated option prices
 
-        // the greeks
-        float delta;
-        float gamma;
-        float vega;
-        float rho;
-    
     public:
         Option(float K, int T, Stock S, float r, int N);
         
+        
         float calculateValue();
 
-        virtual float deriveValue(float price) = 0;
+        virtual void fillTree(BiTree *root) = 0; // helper function for calculate value
+        virtual float deriveValue(float price) = 0; // determine value of the option (i.e. whether option is call or put)
+
+        //getters
+        BiTree *getTree();
+
+        // the greeks
+        float delta(); // delta is calculated one step ahead by default
+        float delta(int n); // calculate delta n steps ahead
+        float gamma();
+        float vega();
+        float rho();
 };
 #endif
