@@ -18,9 +18,16 @@ class Stock {
         float r; // risk free interest rate
         float sigma; // volatility
 
+        float contYield; // continuous dividend yield
+
+        float discYield; // discrete dividend yield
+        int discYieldTime; // when the discrete dividend is payed out
+
     public:
         Stock();
         Stock(float price, float r, float sigma);
+        Stock(float price, float r, float sigma, float contYield);
+        Stock(float price, float r, float sigma, float discYield, int discYieldTime);
         
         float getPrice();
         float getU();
@@ -30,6 +37,11 @@ class Stock {
 
         float getR();
         float getSigma();
+
+        float getContYield();
+        
+        float getDiscYield();
+        float getDiscYieldTime();
 
         void useCRRVals(float deltaT);
         void useJRVals(float deltaT);

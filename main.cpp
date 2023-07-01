@@ -18,15 +18,4 @@ int main() {
     printf ("u: %.2f    d: %.2f\n", stock.getU(), stock.getD());
 
     BiTree *tree = stock.createTree(3);
-
-    EuropeanCall option = EuropeanCall(100, 1, stock, 0.06, 3);
-
-    option.assignTree(tree);
-
-    BiTree::printTree(option.getTree(), 0);
-
-    printf("delta: %.2f\n", option.delta());
-    printf("gamma: %.2f\n", option.gamma());
-    printf("vega: %.2f\n", option.vega());
-    printf("rho: %.2f\n", option.rho());
 }

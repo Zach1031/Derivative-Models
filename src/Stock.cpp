@@ -11,6 +11,8 @@ Stock::Stock() {
 // since it is dependent on time steps, 
 // the probs of u and d cannot be calculated yet
 Stock::Stock(float price, float r, float sigma): price(price), r(r), sigma(sigma) {}
+Stock::Stock(float price, float r, float sigma, float contYield): price(price), r(r), sigma(sigma), contYield(contYield) {}
+Stock::Stock(float price, float r, float sigma, float discYield, int discYieldTime): price(price), r(r), sigma(sigma), discYield(discYield), discYieldTime(discYieldTime) {}
 
 // getters and setters
 float Stock::getPrice() { return price; }
@@ -20,6 +22,7 @@ float Stock::getPU() { return pu; }
 float Stock::getPD() { return pd; }
 float Stock::getR() { return r; }
 float Stock::getSigma() { return sigma; }
+float Stock::getContYield() { return contYield; }
 
 
 // initializes values of u, d, and p based on Jarrow and Rudd paper
@@ -63,8 +66,8 @@ BiTree *Stock::createRoots(float N, float val) {
     BiTree *node = new BiTree;
     node->sVal = val;
     if (N > 0) {
-        node->down = createRoots(N - 1, val * d);
-        node->up = createRoots(N - 1, val * u);
+        node->down = createRoots(N - 1, val * d * pow(1 - discYield, discYieldTime / N));
+        node->up = createRoots(N - 1, val * u * pow(1 - discYield, discYieldTime / N));
     }
     
 

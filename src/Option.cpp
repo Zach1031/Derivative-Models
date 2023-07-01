@@ -28,6 +28,7 @@ float Option::delta(int n) {
 
 // naming convention is the same as delta but for time 2
 // same formula for the next three greeks as the book, although it doesn't appear to be right
+// gamma should be high at the money
 float Option::gamma() {
     float c_2 = tree->up->up->cVal; 
     float c_1 = tree->up->down->cVal; 

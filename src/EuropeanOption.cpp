@@ -24,7 +24,7 @@ void EuropeanOption::fillTree(BiTree *root) {
     fillTree(root->up);
     fillTree(root->down);
     
-    root->cVal = exp(-stock.getR() * dt) * ((stock.getPU() * root->up->cVal) + (stock.getPD() * root->down->cVal));
+    root->cVal = exp((-stock.getR() + stock.getContYield()) * dt) * ((stock.getPU() * root->up->cVal) + (stock.getPD() * root->down->cVal));
 }
 
 float EuropeanOption::calculateValue() {
