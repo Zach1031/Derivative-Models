@@ -34,14 +34,22 @@ class Stock {
         float getD();
         float getPU();
         float getPD();
-
         float getR();
         float getSigma();
-
         float getContYield();
-        
         float getDiscYield();
         float getDiscYieldTime();
+
+        void setPrice(float price);
+        void setU(float u);
+        void setD(float d);
+        void setPU(float pu);
+        void setPD(float pd);
+        void setR(float r);
+        void setSigma(float sigma);
+        void setContYield(float contYield);        
+        void setDiscYield(float discYield);
+        void setDiscYieldTime(float discYieldTime);
 
         void useCRRVals(float deltaT);
         void useJRVals(float deltaT);

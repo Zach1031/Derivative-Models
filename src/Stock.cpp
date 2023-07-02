@@ -24,6 +24,16 @@ float Stock::getR() { return r; }
 float Stock::getSigma() { return sigma; }
 float Stock::getContYield() { return contYield; }
 
+void Stock::setPrice(float price) { this->price = price; }
+void Stock::setU(float u) { this->u = u;}
+void Stock::setD(float d) { this->d = d; }
+void Stock::setPU(float pu) { this->pu = pu;}
+void Stock::setPD(float pd) { this->pd = pd; }
+void Stock::setR(float r) { this->r = r; }
+void Stock::setSigma(float sigma) {this->sigma = sigma; }
+void Stock::setContYield(float contYield) {this->contYield = contYield; }
+
+
 
 // initializes values of u, d, and p based on Jarrow and Rudd paper
 // probaility of shifts are equal, by the step sizes vary

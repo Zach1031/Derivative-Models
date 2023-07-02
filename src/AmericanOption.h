@@ -1,16 +1,16 @@
-#ifndef EUROPEANOPTION
-#define EUROPEANOPTION
+#ifndef AMERICANOPTION
+#define AMERICANOPTION
 
 #include "Option.h"
 #include "Stock.h"
 
-class EuropeanOption: public Option {
+class AmericanOption: public Option {
     private:
         
     protected:
     
     public:
-        EuropeanOption(float K, int T, Stock S, float r, int N);
+        AmericanOption(float K, int T, Stock S, float r, int N);
         
         float calculateValue();
 

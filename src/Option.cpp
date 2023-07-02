@@ -11,6 +11,21 @@ Option::Option(float K, int T, Stock S, float r, int N): K(K), T(T), stock(S), r
     disc = exp(-r * dt);
 }
 
+
+// fill the tree based on the individual options rules
+void Option::fillTree(BiTree *root) {
+    // hit the expiration date
+    if (root->up == NULL) {
+        root->cVal = deriveValue(root->sVal);
+        return;
+    }
+
+    fillTree(root->up);
+    fillTree(root->down);
+    
+    root->cVal = updateValue(root);
+}
+
 float Option::delta() {
     float c_1 = tree->up->cVal; // value of option after one increase
     float c_0 = tree->down->cVal; // value of option after zero increases (a decrease)

@@ -26,8 +26,9 @@ class Option {
         
         float calculateValue();
 
-        virtual void fillTree(BiTree *root) = 0; // helper function for calculate value
+        void fillTree(BiTree *root); // helper function for calculate value
         virtual float deriveValue(float price) = 0; // determine value of the option (i.e. whether option is call or put)
+        virtual float updateValue(BiTree *node) = 0; // helps calculate the current option value based on option type rules
 
         //getters
         BiTree *getTree();

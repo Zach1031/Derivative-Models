@@ -10,53 +10,10 @@ EuropeanOption::EuropeanOption(float K, int T, Stock S, float r, int N): Option(
 }
 
 void EuropeanOption::assignTree(BiTree *root) {
-    fillTree(root);
+    Option::fillTree(root);
     tree = root;
 }
 
-void EuropeanOption::fillTree(BiTree *root) {
-    // hit the expiration date
-    if (root->up == NULL) {
-        root->cVal = deriveValue(root->sVal);
-        return;
-    }
-
-    fillTree(root->up);
-    fillTree(root->down);
-    
-    root->cVal = exp((-stock.getR() + stock.getContYield()) * dt) * ((stock.getPU() * root->up->cVal) + (stock.getPD() * root->down->cVal));
-}
-
-float EuropeanOption::calculateValue() {
-    float stockPrice = stock.getPrice();
-    float highestValue = stockPrice * (pow(stock.getU(), N));
-
-    std::vector<float> stockPrices;
-
-    float u = stock.getU();
-    float d = stock.getD();
-    float pu = stock.getPU();
-    float pd = stock.getPD();
-
-    float disc = exp(-stock.getR() * dt);
-
-    // every possible value replaces an instance of an increase with a decrease
-    for (int i = 0; i < N + 1; i++) {
-        stockPrices.push_back(highestValue * (pow(d, i) / (pow(u, i))));
-    }
-
-    std::vector<float> optionPrices;
-
-    for (int i = 0; i < N + 1; i++) {
-        optionPrices.push_back(deriveValue(stockPrices[i]));
-    }
-
-    // compress each pair of points by taking the weighted average of the two future prices
-    for (int i = N - 1; i >= 0; i--) {
-        for (int j = 0; j <= i; j++) {
-            optionPrices[j] = disc * ((pu * optionPrices[j]) + (pd * optionPrices[j + 1]));
-        }
-    }
-    
-    return optionPrices[0];
-}
+float EuropeanOption::updateValue(BiTree *node) {
+    return exp((-stock.getR() + stock.getContYield()) * dt) * ((stock.getPU() * node->up->cVal) + (stock.getPD() * node->down->cVal));
+};
