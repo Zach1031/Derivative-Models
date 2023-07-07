@@ -110,4 +110,6 @@ float Option::rho() {
     return (upValue - downValue) / (2 * deltaR * 100);
 }
 
-BiTree *Option::getTree() {return tree;}
+BiTree *Option::getTree() { return tree; }
+int Option::getN() { return N; }
+float Option::getK() { return K; }

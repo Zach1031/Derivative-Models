@@ -1,6 +1,6 @@
 CC=g++
 
-SRC=src
+SRC=binomial
 
 SRC_FILES=$(SRC)/*.cpp
 H_FILES=$(SRC)/*.h
@@ -18,4 +18,4 @@ build: $(SRC_FILES) $(H_FILES)
 	mv *.o $(SRC)/
 
 main: $(SRC)/*.o
-	$(CC) $(OBJS) main.cpp -o main
+	$(CC) $(OBJS) monte_carlo/Simulation.o main.cpp -o main

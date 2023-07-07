@@ -1,10 +1,12 @@
 #include <stdio.h>
 
-#include "src/Stock.h"
-#include "src/BiTree.h"
+#include "binomial/Stock.h"
+#include "binomial/BiTree.h"
 
-#include "src/EuropeanOption.h"
-#include "src/EuropeanCall.h"
+#include "binomial/EuropeanOption.h"
+#include "binomial/EuropeanCall.h"
+
+#include "monte_carlo/Simulation.h"
 
 
 int main() {
@@ -16,18 +18,12 @@ int main() {
     stock.setPD(1 - 0.5820);
     stock.setU(1.1);
     stock.setD(1 / 1.1);
-
-
-    printf ("u: %.2f    d: %.2f\n", stock.getU(), stock.getD());
-
-    BiTree *tree = stock.createTree(3);
-
     
 
     EuropeanCall call(100, 1, stock, 0.06, 3);
 
-    call.assignTree(tree);
+    Simulation sim(stock, 1, 10);
 
-    BiTree::printTree(tree, 0);
+    printf("%.2f\n", sim.runSimulation(&call, 100));
 
 }
