@@ -4,14 +4,14 @@
 #include <math.h>
 
 #include "Simulation.h"
-#include "../binomial/Option.h"
+#include "Option.h"
 
 Simulation::Simulation(Stock S, int T, int N): S(S), T(T), N(N) {}
 
 float Simulation::runSimulation(Option *O, int simulations) {
-    float dt = S.getD() / (float)O->getN();
+    float dt = O->getDT();
 
-    float nudt = S.getR() - S.getContYield() - (0.5 * pow(S.getSigma(), 2));
+    float nudt = (S.getR() - S.getContYield() - (0.5 * pow(S.getSigma(), 2))) * dt;
     float sigsdt = S.getSigma() * sqrt(dt);
 
     // log of the price is used since the dist of S
@@ -22,7 +22,8 @@ float Simulation::runSimulation(Option *O, int simulations) {
     float sumCT2 = 0;
 
     // set up generators for random numbers
-    std::default_random_engine generator;
+    std::random_device seed;
+    std::default_random_engine generator(seed());
     std::normal_distribution<double> distribution(0,1);
 
     for (int i = 0; i < simulations; i++) {
@@ -33,7 +34,6 @@ float Simulation::runSimulation(Option *O, int simulations) {
             logPrice += nudt + (sigsdt * epsilon);
         }
 
-        printf("%.2f\n", exp(logPrice));
         sumCT += std::max(exp(logPrice) - O->getK(), 0.0f);
         sumCT2 += pow(exp(logPrice) - O->getK(), 2);
     }

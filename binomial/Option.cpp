@@ -113,3 +113,4 @@ float Option::rho() {
 BiTree *Option::getTree() { return tree; }
 int Option::getN() { return N; }
 float Option::getK() { return K; }
+float Option::getDT() { return dt; }

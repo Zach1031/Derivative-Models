@@ -18,4 +18,4 @@ build: $(SRC_FILES) $(H_FILES)
 	mv *.o $(SRC)/
 
 main: $(SRC)/*.o
-	$(CC) $(OBJS) monte_carlo/Simulation.o main.cpp -o main
+	$(CC) $(OBJS) main.cpp -o main

@@ -34,6 +34,7 @@ class Option {
         BiTree *getTree();
         int getN();
         float getK();
+        float getDT();
 
         // the greeks
         float delta(); // delta is calculated one step ahead by default

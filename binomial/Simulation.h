@@ -1,8 +1,8 @@
 #ifndef SIMULATION
 #define SIMULATION
 
-#include "../binomial/Stock.h"
-#include "../binomial/Option.h"
+#include "Stock.h"
+#include "Option.h"
 
 class Simulation {
     private:

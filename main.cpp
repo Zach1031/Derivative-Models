@@ -6,7 +6,7 @@
 #include "binomial/EuropeanOption.h"
 #include "binomial/EuropeanCall.h"
 
-#include "monte_carlo/Simulation.h"
+#include "binomial/Simulation.h"
 
 
 int main() {
@@ -14,13 +14,10 @@ int main() {
 
     // stock.useJRVals(0.33);
 
-    stock.setPU(0.5820);
-    stock.setPD(1 - 0.5820);
-    stock.setU(1.1);
-    stock.setD(1 / 1.1);
+    stock.setContYield(0.03);
     
 
-    EuropeanCall call(100, 1, stock, 0.06, 3);
+    EuropeanCall call(100, 1, stock, 0.06, 10);
 
     Simulation sim(stock, 1, 10);
 
