@@ -21,6 +21,6 @@ int main() {
 
     Simulation sim(stock, 1, 10);
 
-    printf("%.2f\n", sim.runSimulation(&call, 100));
+    printf("%.2f\n", sim.runSimulation(&call, 600000));
 
 }

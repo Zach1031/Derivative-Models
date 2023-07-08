@@ -1,6 +1,7 @@
 CC=g++
 
 SRC=binomial
+FLAGS=-std=c++17 -lpthread
 
 SRC_FILES=$(SRC)/*.cpp
 H_FILES=$(SRC)/*.h
@@ -14,8 +15,8 @@ all: build main
 
 # move is potentially trivial, but it keeps the project organized
 build: $(SRC_FILES) $(H_FILES)
-	$(CC) -c $(SRC_FILES)
+	$(CC) $(FLAGS) -c $(SRC_FILES)
 	mv *.o $(SRC)/
 
 main: $(SRC)/*.o
-	$(CC) $(OBJS) main.cpp -o main
+	$(CC) $(OBJS) $(FLAGS) main.cpp -o main
