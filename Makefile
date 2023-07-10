@@ -1,7 +1,7 @@
 CC=g++
 
 SRC=binomial
-FLAGS=-std=c++17 -lpthread
+FLAGS=-std=c++17
 
 SRC_FILES=$(SRC)/*.cpp
 H_FILES=$(SRC)/*.h
