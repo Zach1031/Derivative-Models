@@ -54,40 +54,53 @@ float Simulation::runSimulation(Option *O, int simulations) {
         threads[i].join();
     }
     
-    return sumCT / simulations;
+    return sumCT / simulations * exp(-S.getR() * T);
 }
 
-// float Simulation::runSimulation(Option *O, int simulations) {
-//     float dt = O->getDT();
+void simulateAntithetic(int sims, int N, float initPrice, float nudt, float sigsdt, float &sumCT, Option *O) {
+        // set up generators for random numbers
+        std::random_device seed;
+        std::default_random_engine generator(seed());
+        std::normal_distribution<double> distribution(0,1);
+        
+        for (int i = 0; i < sims; i++) {
+            // simulate value for stock
+            float logPrice1 = initPrice;
+            float logPrice2 = initPrice;
+            for (int j = 0; j < N; j++) {
+                float epsilon = distribution(generator);
+                logPrice1 += nudt + (sigsdt * epsilon);
+                logPrice2 += nudt + (sigsdt * -epsilon);
+            }
+            lock.lock();
+                sumCT += 0.5 * (std::max(O->deriveValue(exp(logPrice1)), 0.0f), std::max(O->deriveValue(exp(logPrice2)), 0.0f));
+            lock.unlock();
+        }
+}
 
-//     float nudt = (S.getR() - S.getContYield() - (0.5 * pow(S.getSigma(), 2))) * dt;
-//     float sigsdt = S.getSigma() * sqrt(dt);
+float Simulation::runSimulationAntithetic(Option *O, int simulations) {
+    float dt = O->getDT();
 
-//     // log of the price is used since the dist of S
-//     // is assumed to log normal
-//     float initLogPrice = std::log(S.getPrice());
+    float nudt = (S.getR() - S.getContYield() - (0.5 * pow(S.getSigma(), 2))) * dt;
+    float sigsdt = S.getSigma() * sqrt(dt);
 
-//     float sumCT = 0;
-//     float sumCT2 = 0;
+    // log of the price is used since the dist of S
+    // is assumed to log normal
+    float initLogPrice = std::log(S.getPrice());
 
-//     // set up generators for random numbers
-//     std::random_device seed;
-//     std::default_random_engine generator(seed());
-//     std::normal_distribution<double> distribution(0,1);
+    float sumCT = 0;
 
-//     for (int i = 0; i < simulations; i++) {
-//         // simulate value for stock
-//         float logPrice = initLogPrice;
-//         for (int j = 0; j < N; j++) {
-//             float epsilon = distribution(generator);
-//             logPrice += nudt + (sigsdt * epsilon);
-//         }
+    std::vector<std::thread> threads;
 
-//         printf("%d\n", i);
+    // threads set to 10 for testing
+    const int THREADS = 10;
+    for (int i = 0; i < THREADS; i++) {
+        threads.push_back(std::thread(simulate, simulations / THREADS, N, initLogPrice, nudt, sigsdt, std::ref(sumCT), O));
+    }
 
-//         sumCT += std::max(exp(logPrice) - O->getK(), 0.0f);
-//         sumCT2 += pow(exp(logPrice) - O->getK(), 2);
-//     }
-
-//     return sumCT / simulations;
-// }
+    for (int i = 0; i < THREADS; i++) {
+        threads[i].join();
+    }
+    
+    return sumCT / simulations * exp(-S.getR() * T);
+}
