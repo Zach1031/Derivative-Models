@@ -1,12 +1,12 @@
 #include <stdio.h>
 
-#include "binomial/Stock.h"
-#include "binomial/BiTree.h"
+#include "src/Stock.h"
+#include "src/BiTree.h"
 
-#include "binomial/EuropeanOption.h"
-#include "binomial/EuropeanCall.h"
+#include "src/EuropeanOption.h"
+#include "src/EuropeanCall.h"
 
-#include "binomial/Simulation.h"
+#include "src/Simulation.h"
 
 
 int main() {
@@ -15,6 +15,7 @@ int main() {
     // stock.useJRVals(0.33);
 
     stock.setContYield(0.03);
+    
     
 
     EuropeanCall call(100, 1, stock, 0.06, 10);
